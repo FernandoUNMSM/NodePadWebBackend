@@ -8,6 +8,7 @@ function usersApp(app){
     const userService = new UsersServices()
 
     router.get("/", async function(req,res,next){
+        res.setHeader ( 'Access-Control-Allow-Origin' , '*' ) ;
         const {tags} = req.query;
         try{
             const users = await userService.getUsers({tags});
