@@ -1,5 +1,8 @@
 const express = require('express');
 const UsersServices = require('../services/users');
+
+let multer = require('multer');
+let upload = multer();
 // const { usersMock } = require('../utils/users')
 
 function usersApp(app){
@@ -33,7 +36,7 @@ function usersApp(app){
             next(err)
         }
     })
-    router.post("/", async function(req,res,next){
+    router.post("/", upload.fields([]), async function(req,res,next){
         res.setHeader('Content-Type', 'application/json')
         res.setHeader('Access-Control-Allow-Origin' , '*' );
         // const {body: user} = req.body;
