@@ -8,7 +8,7 @@ function usersApp(app){
     const userService = new UsersServices()
 
     router.get("/", async function(req,res,next){
-        res.setHeader('Access-Control-Allow-Origin' , '*' );
+        res.set('Access-Control-Allow-Origin' , '*' );
         const {tags} = req.query;
         try{
             const users = await userService.getUsers({tags});
@@ -21,7 +21,7 @@ function usersApp(app){
         }
     })
     router.get("/:id", async function(req,res,next){
-        res.setHeader('Access-Control-Allow-Origin' , '*' );
+        res.set('Access-Control-Allow-Origin' , '*' );
         const {id} = req.params;
         try{
             const users = await userService.getUser({id});
@@ -34,7 +34,7 @@ function usersApp(app){
         }
     })
     router.post("/", async function(req,res,next){
-        res.setHeader('Access-Control-Allow-Origin' , '*' );
+        res.set('Access-Control-Allow-Origin' , '*' );
         // const {body: user} = req.body;
         try{
             // console.log(req.body)
@@ -48,7 +48,7 @@ function usersApp(app){
         }
     })
     router.put("/:id", async function(req,res,next){
-        res.setHeader('Access-Control-Allow-Origin' , '*' );
+        res.set('Access-Control-Allow-Origin' , '*' );
         const {id} = req.params;
         // const {body: user} = req.body;
         try{
@@ -63,7 +63,7 @@ function usersApp(app){
         }
     })
     router.delete("/:id", async function(req,res,next){
-        res.setHeader('Access-Control-Allow-Origin' , '*' );
+        res.set('Access-Control-Allow-Origin' , '*' );
         const {id} = req.params;
 
         try{
