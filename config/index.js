@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const config = {
     dev: process.env.NODE_ENV !== 'production',
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 4000,
     //MONGO
     cors: process.env.CORS,
     dbUser: process.env.DB_USER,

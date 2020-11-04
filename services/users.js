@@ -30,5 +30,12 @@ class UsersServices {
         const deleteUserId = await this.mongoDB.delete(this.collection, userId.id);
         return deleteUserId;
     }
+    async validateUser(user) {
+        const validate = await this.mongoDB.validate(this.collection, user)
+        // console.log(Object.keys(validate))
+        return (Object.keys(validate)[0] === '0')
+        ? true
+        : false
+    }
 }
 module.exports = UsersServices;

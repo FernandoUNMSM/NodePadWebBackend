@@ -36,13 +36,27 @@ function usersApp(app){
             next(err)
         }
     })
+    router.post("/login", upload.fields([]), async function(req,res,next){
+        res.setHeader('Content-Type', 'application/json')
+        res.setHeader('Access-Control-Allow-Origin' , '*' );
+        try{
+            const validate = await userService.validateUser(req.body);
+            res.status(200).json({
+                data: validate,
+                message: 'user validate'
+            });
+        }catch(err){
+            next(err)
+        }
+    })
+
     router.post("/", upload.fields([]), async function(req,res,next){
         res.setHeader('Content-Type', 'application/json')
         res.setHeader('Access-Control-Allow-Origin' , '*' );
         // const {body: user} = req.body;
         try{
-            console.log(req.body)
             const createUserId = await userService.createUser(req.body);
+            console.log(createUserId)
             res.status(201).json({
                 data: createUserId,
                 message: 'user created'
