@@ -12,8 +12,8 @@ class UsersServices {
         return users || [];
     }
     async getUser(userId) {
-        // console.log(userId.id)
-        const user = await this.mongoDB.get(this.collection, userId.id);
+        // console.log(userId)
+        const user = await this.mongoDB.get(this.collection, userId);
         return user || {};
     }
     async createUser(user) {
@@ -23,7 +23,9 @@ class UsersServices {
     }
     async updateUser(userId, user) {
         const updateUserId = await this.mongoDB.update(this.collection, userId, user);
-        return updateUserId;
+        return this.getUser(updateUserId)
+            .then(res => res)
+        // return updateUserId;
     }
     async deleteUser(userId) {
         // console.log(userId)
@@ -32,9 +34,9 @@ class UsersServices {
     }
     async validateUser(user) {
         const validate = await this.mongoDB.validate(this.collection, user)
-        // console.log(Object.keys(validate))
+        // console.log(validate)
         return (Object.keys(validate)[0] === '0')
-        ? true
+        ? {validate, 'valid': true}
         : false
     }
 }

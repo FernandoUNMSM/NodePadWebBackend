@@ -1,6 +1,7 @@
 const express = require('express')
 
 const app = express();
+// var cors = require('cors');
 
 const { config } = require('./config/index')
 const usersApi = require('./routes/users.js')
@@ -9,8 +10,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 usersApi(app)
-
-// app.use(cors());
 
 app.listen(config.port,function(){
     console.log('Listening a la besto tiburoncita')
