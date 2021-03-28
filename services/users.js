@@ -35,9 +35,12 @@ class UsersServices {
     async validateUser(user) {
         const validate = await this.mongoDB.validate(this.collection, user)
         // console.log(validate)
+        // return (Object.keys(validate)[0] === '0')
+        // ? {validate, 'valid': true}
+        // : false
         return (Object.keys(validate)[0] === '0')
-        ? {validate, 'valid': true}
-        : false
+        ? true
+        : new Error('no se encontro')
     }
 }
 module.exports = UsersServices;

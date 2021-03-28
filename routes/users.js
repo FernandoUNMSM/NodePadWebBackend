@@ -45,10 +45,17 @@ function usersApp(app) {
 		// res.setHeader('Access-Control-Allow-Origin', '*');
 		try {
 			const validate = await userService.validateUser(req.body);
-			res.status(200).json({
-				data: validate,
-				message: 'user validate'
-			});
+			if(validate === true){
+				res.status(201).json({
+					jwt: validate
+				})
+			}else{
+				res.send(401)
+			}
+			// res.status(200).json({
+			// 	data: validate,
+			// 	message: 'user validate'
+			// });
 		} catch (err) {
 			next(err)
 		}
@@ -62,9 +69,12 @@ function usersApp(app) {
 			const createUserId = await userService.createUser(req.body);
 			console.log(createUserId)
 			res.status(201).json({
-				data: createUserId,
-				message: 'user created'
-			});
+				jwt: (createUserId) ? true : false
+			})
+			// res.status(201).json({
+			// 	data: createUserId,
+			// 	message: 'user created'
+			// });
 		} catch (err) {
 			next(err)
 		}
